@@ -1,0 +1,65 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  padding-bottom: 30vh;
+  margin: 20px;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+}
+header h1 {
+  font-size: 80px;
+}
+@media screen and (max-width: 400px) {
+  header h1 {
+    font-size: 70px;
+  }
+}
+header h1 span {
+  background: -webkit-linear-gradient(90deg, #53DD6C, #3367ff);
+  background: linear-gradient(90deg, #53DD6C, #3367ff);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn {
+  background: -webkit-linear-gradient(90deg, #53DD6C, #3367ff);
+  background: linear-gradient(90deg, #53DD6C, #3367ff);
+  transition: 0.3s;
+  padding: 15px 20px;
+  margin: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  border-radius: 10px;
+  display: inline-block;
+}
+.btn:hover {
+  filter: opacity(0.7);
+}
+h2 {
+  background: -webkit-linear-gradient(90deg, #53DD6C, #3367ff);
+  background: linear-gradient(90deg, #53DD6C, #3367ff);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 50px;
+  text-align: center;
+}
+section {
+  max-width: 900px;
+  margin: auto;
+  min-height: 35vh;
+}
+section p {
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  text-align: justify;
+  line-height: 1.4;
+}

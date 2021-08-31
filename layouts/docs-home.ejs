@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include(projectroot + '/theme/includes/head.ejs') %>
+<body>
+  <%- include(projectroot + '/theme/includes/header.ejs') %>
+      <div class="main">
+        <h1><%- site.title %></h1>
+        <p><%- site.description %> </p>
+        <% for(let i = 0; i < filemap.length; i++) { %>
+          <a href="<%- site.root %>/<%= filemap[i].path %>" class="card"><%= filemap[i].frontmatter.title %></a>
+        <% } %> 
+        <%- include(projectroot + '/theme/includes/footer.ejs') %>
+      </div>
+    </div>
+  </main>
+  
+</body>
+</html>

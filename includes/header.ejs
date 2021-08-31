@@ -1,0 +1,73 @@
+<header class="site-header">
+  <!-- <div class="wrapper"> -->
+    <!-- <a href="<%- site.root %>" class="site-title" rel="author"><%- site.title %></a> -->
+    <a onclick="document.querySelector('.nav').classList.toggle('show')" class="menu" href="#">
+      <svg viewBox="0 0 100 80" width="15" height="15">
+        <rect width="100" height="20"></rect>
+        <rect y="30" width="100" height="20"></rect>
+        <rect y="60" width="100" height="20"></rect>
+      </svg>
+    </a>
+    <img src="<%- site.root %>/assets/static/logomark.png" class="logo-wide" alt="">
+    <img src="<%- site.root %>/assets/static/logomark_sm.png" class="logo-small" alt="">
+    <a href="<%- site.root %>" class="home">Home</a>
+    <a href="<%- site.root %>/posts/getting-started.html" class="download">Download</a>
+    <div class="searchwrapper">
+      <input type="text" placeholder="Search..." id="searchbar">
+      <div class="autocompletions">
+        <!-- <span>asdf</span> -->
+      </div>
+    </div>
+    <script>
+      var idx = elasticlunr(function () {
+        this.setRef('name')
+        this.addField('section_title', {boost: 400})
+        this.addField('page_title', {boost: 200})
+        this.addField('text', {boost: 20})
+      })
+      fetch('<%- site.root %>/assets/static/search_data.json')
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(function (doc) {
+            idx.addDoc(doc)
+          })
+          console.log(data)
+        });
+      
+      document.getElementById('searchbar').addEventListener('focus', (e) => {
+        document.querySelector('.autocompletions').classList.toggle('show');
+        e.target.classList.toggle('sharpenBottom');
+      })
+      document.getElementById('searchbar').addEventListener('blur', (e) => {
+        setTimeout(() => {
+          document.querySelector('.autocompletions').classList.toggle('show');
+          e.target.classList.toggle('sharpenBottom');
+        }, 500)
+      })
+      document.getElementById('searchbar').addEventListener('keyup', (e) => {
+        document.querySelector('.autocompletions').innerHTML = ''
+        idx.search(e.target.value).forEach(itm => {
+          let a = document.createElement('a');
+          a.href = itm.ref;
+          a.innerHTML = itm.doc.page_title;
+          document.querySelector('.autocompletions').appendChild(a)
+          console.log(itm)
+        })
+      })
+    </script>
+  <!-- </div> -->
+</header>
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <div class="nav">
+      <% filemap.sort(function(a, b) {
+        if(a.frontmatter.nav_order < b.frontmatter.nav_order) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }) %> 
+      <% for(let i = 0; i < filemap.length; i++) { %>
+        <a href="<%- site.root %>/<%= filemap[i].path %>"><%= filemap[i].frontmatter.title %></a>
+      <% } %> 
+    </div>
